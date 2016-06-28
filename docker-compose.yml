@@ -1,0 +1,78 @@
+################ ELASTICSEARCH CONTAINERS ################
+# es-master
+esmaster:
+  build: ./elasticsearch
+  environment:
+   NODE_NAME: master
+   IS_MASTER_NODE: true
+   IS_DATA_NODE: false
+   # CONTAINER_HOST_ADDRESS: 172.17.42.1
+   # List of Unicast hosts, Marvel targets format: host:port,host:port
+   UNICAST_HOSTS: 172.17.42.1:9300
+   MARVEL_TARGETS: 172.17.42.1:9200
+  ports:
+   - "9200:9200"
+   - "9300:9300"
+  volumes:
+   # - /data/elasticsearch:/usr/share/elasticsearch/data
+   - /etc/timezone:/etc/timezone:ro
+   - /etc/localtime:/etc/localtime:ro
+  privileged: true
+  restart: always
+
+# es-data-node-1
+esdatanode1:
+  build: ./elasticsearch
+  environment:
+   NODE_NAME: node1
+   IS_MASTER_NODE: false
+   # CONTAINER_HOST_ADDRESS: 172.17.42.1
+   # List of Unicast hosts, Marvel targets format: host:port,host:port
+   UNICAST_HOSTS: 172.17.42.1:9300
+   MARVEL_TARGETS: 172.17.42.1:9200
+  ports:
+   - "19200:9200"
+   - "19300:9300"
+  volumes:
+   - /etc/timezone:/etc/timezone:ro
+   - /etc/localtime:/etc/localtime:ro
+  privileged: true
+  restart: always
+
+# es-data-node-2
+esdatanode2:
+  build: ./elasticsearch
+  environment:
+   NODE_NAME: node2
+   IS_MASTER_NODE: false
+   # CONTAINER_HOST_ADDRESS: 172.17.42.1
+   # List of Unicast hosts, Marvel targets format: host:port,host:port
+   UNICAST_HOSTS: 172.17.42.1:9300
+   MARVEL_TARGETS: 172.17.42.1:9200
+  ports:
+   - "29200:9200"
+   - "29300:9300"
+  volumes:
+   - /etc/timezone:/etc/timezone:ro
+   - /etc/localtime:/etc/localtime:ro
+  privileged: true
+  restart: always
+
+# es-data-node-3
+esdatanode3:
+  build: ./elasticsearch
+  environment:
+   NODE_NAME: node3
+   IS_MASTER_NODE: false
+   # CONTAINER_HOST_ADDRESS: 172.17.42.1
+   # List of Unicast hosts, Marvel targets format: host:port,host:port
+   UNICAST_HOSTS: 172.17.42.1:9300
+   MARVEL_TARGETS: 172.17.42.1:9200
+  ports:
+   - "39200:9200"
+   - "39300:9300"
+  volumes:
+   - /etc/timezone:/etc/timezone:ro
+   - /etc/localtime:/etc/localtime:ro
+  privileged: true
+  restart: always
